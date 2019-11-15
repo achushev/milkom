@@ -1,0 +1,43 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: $font-family;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    background-color: $body-background;
+    color: $text-color;
+
+    a {
+        text-decoration: none;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+[class^="svg-icon"] {
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    vertical-align: middle;
+    image-rendering: pixelated;
+}
+
+code {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 0 30px;
+    padding: 20px;
+    background: #eee;
+    border: 1px solid #ccc;
+    word-break: break-all;
+}

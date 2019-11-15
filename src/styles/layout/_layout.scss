@@ -1,0 +1,23 @@
+@import 'header';
+@import 'sidebar';
+@import 'main';
+@import 'footer';
+
+.layout-container {
+    height: 100%;
+    width: 100%;
+    display: table;
+}
+
+.section-container {
+    @include box-shadow();
+    background-color: #FFF;
+    padding: $padding/2;
+    margin-bottom: $margin/2
+}
+
+@media only screen and (max-width: $breakpoint-768) {
+    .menu-open {
+        overflow: hidden;
+    }
+}

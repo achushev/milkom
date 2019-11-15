@@ -1,0 +1,51 @@
+.layout-sidebar {
+    width: $sidebar-width;
+    padding: $padding 0;
+    height: 100vh;
+    background: $sidebar-background;
+    position: fixed;
+    z-index: 10;
+
+    &-navigation {
+        position: relative;
+        height: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+
+        a {
+            display:block;
+            color:$text-light;
+            font-size:20px;
+            padding: 20px 30px;
+            font-weight: 300;
+
+            & + a {
+                border-top: 1px solid rgba(52, 56, 65, 0.6);
+            }
+
+            &.active {
+                background: #222b38;
+            }
+
+            svg {
+                width: 1em;
+                height: 1em;
+                vert-align:middle;
+                display:inline-block;
+                margin: 0 10px 0 0;
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: $breakpoint-768) {
+    .layout-sidebar {
+        width: 100vw;
+        padding-top: 100px;
+
+        &-navigation {
+            width: $sidebar-width;
+        }
+    }
+}

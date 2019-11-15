@@ -1,0 +1,37 @@
+/* fonts */
+$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
+/* colors */
+$body-background: #f8f8f8;
+$sidebar-background: #354357;
+$text-color: #333;
+$text-grey-color: #afafaf;
+$text-light: #ccd0d5;
+$border-color: #ccc;
+
+/* dimensions */
+$sidebar-width: 250px;
+
+/* spacing */
+$padding: 30px;
+$margin: 50px;
+
+/* css transition variables */
+$transition-property: all;
+$transition-timing-function: cubic-bezier(0.165, 0.840, 0.440, 1.000);
+$transition-duration: 0.35s;
+$transition-delay: 0s;
+
+/* default breakpoints */
+$breakpoint-1280: '1280px';
+$breakpoint-1180: '1180px';
+$breakpoint-1024: '1024px';
+$breakpoint-960:  '960px';
+$breakpoint-800:  '800px';
+$breakpoint-768:  '768px';
+$breakpoint-720:  '720px';
+$breakpoint-640:  '640px';
+$breakpoint-540:  '540px';
+$breakpoint-480:  '480px';
+$breakpoint-360:  '360px';
+$breakpoint-320:  '320px';

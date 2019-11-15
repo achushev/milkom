@@ -1,0 +1,21 @@
+.layout-main {
+    height: 100%;
+    padding-left: $sidebar-width; //100px $padding $padding #{$sidebar-width + $padding};
+    padding-top: 70px;
+
+    &-wrapper {
+        padding: $padding;
+    }
+}
+
+@media only screen and (max-width: $breakpoint-768) {
+    .layout-main {
+        position: relative;
+        z-index: 20;
+        padding: 0;
+        background-color: $body-background;
+        will-change: transform;
+        @include transition($property: transform);
+        @include box-shadow(16);
+    }
+}
