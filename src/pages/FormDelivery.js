@@ -83,11 +83,10 @@ export const FormDelivery = () => {
                 <InputField name="kolichestvo" type="number" label="Количество"/>
               </div>
               <div>
-                {/*<InputField name="dostavkaData" type="text" label="Дата"/>*/}
                 <DateField name="dostavkaData" label="Дата"/>
               </div>
               <Button variant="contained" type="submit">
-                Submit
+                Запази данните
               </Button>
             </form>
           )}
