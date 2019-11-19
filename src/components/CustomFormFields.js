@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { useField, useFormikContext } from "formik";
 import { TextField } from "@material-ui/core";
 import DateFnsUtils from "@date-io/date-fns";
@@ -26,7 +26,9 @@ export const DateField = ({ label, name, ...props }) => {
 
   const handleDateChange = date => {
     setSelectedDate(date);
-    formik.setFieldValue(name, date.toLocaleDateString("en-CA"))
+    if (date !== null) {
+      formik.setFieldValue(name, date.toLocaleDateString("en-CA"));
+    }
   };
   const [field] = useField(props);
   //const errorText = meta.error && meta.touched ? meta.error : "";
@@ -45,7 +47,7 @@ export const DateField = ({ label, name, ...props }) => {
         value={selectedDate}
         onChange={handleDateChange}
         KeyboardButtonProps={{
-          'aria-label': 'change date',
+          "aria-label": "change date"
         }}
       />
     </MuiPickersUtilsProvider>
