@@ -6,6 +6,11 @@ import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider
 } from "@material-ui/pickers";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import { makeStyles } from "@material-ui/core/styles";
 
 export const InputField = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -19,6 +24,7 @@ export const InputField = ({ label, ...props }) => {
       variant="outlined"
       helperText={errorText}
       error={!!errorText}
+      fullWidth
     />
   );
 };
@@ -53,5 +59,56 @@ export const DateField = ({ label, name, ...props }) => {
         }}
       />
     </MuiPickersUtilsProvider>
+  );
+};
+
+export const SelectField = ({ label, name, options, ...props }) => {
+  const formik = useFormikContext();
+  const [value, setValue] = React.useState("");
+
+  const inputLabel = React.useRef(null);
+  const [labelWidth, setLabelWidth] = React.useState(0);
+  React.useEffect(() => {
+    setLabelWidth(inputLabel.current.offsetWidth);
+  }, []);
+
+  const handleChange = event => {
+    setValue(event.target.value);
+    formik.setFieldValue(name, event.target.value);
+  };
+
+  const [field] = useField(name, options, props);
+
+  const useStyles = makeStyles(theme => ({
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2)
+    }
+  }));
+
+  const classes = useStyles();
+
+  return (
+    <FormControl variant="outlined" fullWidth margin="normal">
+      <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label">
+        {label}
+      </InputLabel>
+      <Select
+        {...field}
+        id={name}
+        value={value}
+        onChange={handleChange}
+        labelWidth={labelWidth}
+      >
+        {options.map((item, index) => (
+          <MenuItem key={index} value={item.value}>
+            {item.label}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 };

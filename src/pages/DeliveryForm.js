@@ -42,6 +42,15 @@ export const DeliveryForm = () => {
     { name: "shofiorIme", label: "Име на шофьор", type: "text" },
     { name: "kamionNomer", label: "Номер на камион", type: "tel" },
     { name: "ferma", label: "Ферма", type: "text" },
+    // {
+    //   name: "marka",
+    //   label: "Марка",
+    //   type: "select",
+    //   options: [
+    //     { value: "nike", label: "Найк" },
+    //     { value: "addidas", label: "Адисас" }
+    //   ]
+    // },
     { name: "kolichestvo", label: "Количество", type: "tel" },
     { name: "dostavkaData", label: "Дата", type: "datepicker" }
   ];

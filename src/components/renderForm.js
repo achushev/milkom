@@ -1,13 +1,22 @@
 import React from "react";
-import { DateField, InputField } from "./CustomFormFields";
+import { DateField, InputField, SelectField } from "./CustomFormFields";
 
-export const RenderForm = ({ formFields }) =>
-  formFields.map((item, index) =>
+export const RenderForm = ({ formFields }) => {
+  const inputLabel = React.useRef(null);
+  return formFields.map((item, index) =>
     item.type === "heading" ? (
       <h2 key={index}>{item.label}</h2>
     ) : item.type === "datepicker" ? (
       <div key={index}>
         <DateField name={item.name} label={item.label} />
+      </div>
+    ) : item.type === "select" ? (
+      <div key={index}>
+        <SelectField
+          name={item.name}
+          label={item.label}
+          options={item.options}
+        />
       </div>
     ) : (
       <div key={index}>
@@ -15,3 +24,4 @@ export const RenderForm = ({ formFields }) =>
       </div>
     )
   );
+};
