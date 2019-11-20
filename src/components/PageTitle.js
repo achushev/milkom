@@ -1,12 +1,8 @@
 import React, { useContext } from "react";
 import { GlobalStateContext } from "../providers/GlobalStateProvider";
 
-export const Header = () => {
+export const PageTitle = () => {
   const { pageTitle } = useContext(GlobalStateContext);
 
-  return (
-    <header className="layout-header">
-      <h1 className="page-title">{pageTitle}</h1>
-    </header>
-  );
+  return <h1 className="page-title">{pageTitle}</h1>;
 };

@@ -4,7 +4,30 @@
     height: 100vh;
     background: $sidebar-background;
     position: fixed;
+
     z-index: 10;
+    padding-top: 200px;
+
+    .logo {
+        position: absolute;
+        left: $padding;
+        top: $padding;
+        right: $padding;
+        display: block;
+        width: 100%;
+        max-width: 190px;
+    }
+
+    .menu-button {
+        color: #fff;
+        font-size: 30px;
+        height: 48px;
+        line-height: 48px;
+        position: absolute;
+        left: $padding;
+        top: 12px;
+        display: none;
+    }
 
     &-navigation {
         position: relative;
@@ -46,6 +69,18 @@
 
         &-navigation {
             width: $sidebar-width;
+        }
+
+        .menu-button {
+            display: block;
+        }
+
+        .logo {
+            position: absolute;
+            left: 50vw;
+            margin-left: -60px;
+            width: 120px;
+            top: 20px;
         }
     }
 }
