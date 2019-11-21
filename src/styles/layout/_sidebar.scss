@@ -4,9 +4,7 @@
     height: 100vh;
     background: $sidebar-background;
     position: fixed;
-
     z-index: 10;
-    padding-top: 200px;
 
     .logo {
         position: absolute;
@@ -27,6 +25,9 @@
         left: $padding;
         top: 12px;
         display: none;
+        background:none;
+        border:0;
+        cursor: pointer;
     }
 
     &-navigation {

@@ -10,7 +10,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-import { makeStyles } from "@material-ui/core/styles";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 export const InputField = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -77,22 +77,24 @@ export const SelectField = ({ label, name, options, ...props }) => {
     formik.setFieldValue(name, event.target.value);
   };
 
-  const [field] = useField(name, options, props);
+  const [field, meta] = useField(name, options, props);
+  const errorText = meta.error && meta.touched ? meta.error : "";
 
-  const useStyles = makeStyles(theme => ({
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2)
+  React.useEffect(() => {
+    if (field.value === "") {
+      setValue("");
+      formik.setFieldValue(name, "");
     }
-  }));
-
-  const classes = useStyles();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [field.value]);
 
   return (
-    <FormControl variant="outlined" fullWidth margin="normal">
+    <FormControl
+      variant="outlined"
+      fullWidth
+      margin="normal"
+      error={!!errorText}
+    >
       <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label">
         {label}
       </InputLabel>
@@ -109,6 +111,7 @@ export const SelectField = ({ label, name, options, ...props }) => {
           </MenuItem>
         ))}
       </Select>
+      {errorText && <FormHelperText>{errorText}</FormHelperText>}
     </FormControl>
   );
 };

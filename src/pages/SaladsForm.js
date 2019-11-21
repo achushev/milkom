@@ -15,33 +15,42 @@ import { RenderForm } from "../components/renderForm";
 import Fade from "../components/Fade";
 import Notification from "../components/Notification";
 
-export const MilkForm = () => {
+export const SaladsForm = () => {
   const [data, setData] = useState();
   const [showSuccess, setShowSuccess] = useState(false);
   const { setPageTitle } = useContext(GlobalStateContext);
   const { useStyles } = useContext(StylesContext);
-  setPageTitle("Цех прясно мляко");
+  setPageTitle("Цех кисело мляко");
   const styles = useStyles();
 
   useEffect(() => {
-    API("read", "cehPrMlyakoRead").then(function(response) {
+    API("read", "cehSalatiRead").then(function(response) {
       setData(response.data.records);
     });
     // eslint-disable-next-line
   }, []);
 
-  const formFields = [
-    { name: "lotNomer", label: "Партида", type: "text" },
-    { name: "broiki", label: "Бройки", type: "tel" },
+  const vidObj = [
     {
-      name: "dataProizvodstvo",
-      label: "Дата производство",
-      type: "datepicker"
+      label: "Млечна салата",
+      value: "mlechna_salata"
     },
-    { name: "srokGodnost", label: "Срок на годност", type: "datepicker" }
+    {
+      label: "Руска салата",
+      value: "ruska_salata"
+    }
   ];
 
-  const initialValues = SetUpInitialValues(formFields);
+  const vlojenProduktObj = [
+    {
+      label: "Шунка",
+      value: "shunka"
+    },
+    {
+      label: "Салам",
+      value: "salam"
+    }
+  ];
 
   const ValidationSchema = Yup.object().shape({
     lotNomer: Yup.number()
@@ -51,10 +60,59 @@ export const MilkForm = () => {
       "Моля въведете дата на производство"
     ),
     srokGodnost: Yup.string().required("Моля въведете срок на годност"),
+    vid: Yup.string().required("Моля въведете вид"),
     broiki: Yup.number()
       .required("Моля въведете количество")
+      .typeError("Моля въведете само цифри"),
+    etiketi: Yup.number()
+      .required("Моля въведете етикети")
+      .typeError("Моля въведете само цифри"),
+    kashoni: Yup.number()
+      .required("Моля въведете кашони")
+      .typeError("Моля въведете само цифри"),
+    vlojenProdukt: Yup.string().required("Моля въведете вложен продукт"),
+    kolVlojenProdukt: Yup.number()
+      .required("Моля въведете количество вложен продукт")
       .typeError("Моля въведете само цифри")
   });
+
+  const formFields = [
+    { name: "lotNomer", label: "Партида", type: "text" },
+    {
+      name: "dataProizvodstvo",
+      label: "Дата производство",
+      type: "datepicker"
+    },
+    { name: "srokGodnost", label: "Срок на годност", type: "datepicker" },
+    {
+      name: "vid",
+      label: "Вид",
+      type: "select",
+      options: vidObj
+    },
+    { name: "broiki", label: "Бройки", type: "tel" },
+    { name: "etiketi", label: "Етикети", type: "tel" },
+    { name: "kashoni", label: "Кашони", type: "tel" },
+    {
+      name: "vlojenProdukt",
+      label: "Вложен продукт",
+      type: "select",
+      options: vlojenProduktObj
+    },
+    {
+      name: "kolVlojenProdukt",
+      label: "Количество вложен продукт",
+      type: "tel"
+    },
+    { label: "Добавки", type: "heading" },
+    { name: "chushki", label: "Чушки", type: "tel" },
+    { name: "kisKrastavici", label: "Кисели краставици", type: "tel" },
+    { name: "krastavici", label: "Краставици", type: "tel" },
+    { name: "podpravki", label: "Подправки", type: "tel" },
+    { name: "shunka", label: "Шунка", type: "tel" }
+  ];
+
+  const initialValues = SetUpInitialValues(formFields);
 
   return (
     <>
@@ -63,7 +121,7 @@ export const MilkForm = () => {
           initialValues={initialValues}
           validationSchema={ValidationSchema}
           onSubmit={(values, actions) => {
-            API("write", "cehPrMlyakoWrite", values).then(function() {
+            API("write", "cehSalatiWrite", values).then(function() {
               setData([...data, values]);
               setShowSuccess(true);
               setTimeout(() => {

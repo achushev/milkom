@@ -1,0 +1,40 @@
+.notification {
+    display:block;
+    padding:20px;
+    @include box-shadow(8);
+    border-radius:3px;
+    background:#FFF;
+    margin-top:20px;
+    font-size:20px;
+
+    svg {
+        font-size:28px;
+        vertical-align:-0.2em;
+    }
+
+    &.success {
+        border-left: 3px solid #2BDE3F;
+
+        svg {
+            color:#2BDE3F;
+        }
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

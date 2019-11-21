@@ -12,6 +12,8 @@ import Paper from "@material-ui/core/Paper";
 import { API } from "../providers/API";
 import { TableDisplay } from "../components/tableDisplay";
 import { RenderForm } from "../components/renderForm";
+import Fade from "../components/Fade";
+import Notification from "../components/Notification";
 
 const ValidationSchema = Yup.object().shape({
   kamionNomer: Yup.number()
@@ -26,6 +28,7 @@ const ValidationSchema = Yup.object().shape({
 
 export const DeliveryForm = () => {
   const [data, setData] = useState();
+  const [showSuccess, setShowSuccess] = useState(false);
   const { setPageTitle } = useContext(GlobalStateContext);
   const { useStyles } = useContext(StylesContext);
   setPageTitle("Доставка");
@@ -42,15 +45,6 @@ export const DeliveryForm = () => {
     { name: "shofiorIme", label: "Име на шофьор", type: "text" },
     { name: "kamionNomer", label: "Номер на камион", type: "tel" },
     { name: "ferma", label: "Ферма", type: "text" },
-    // {
-    //   name: "marka",
-    //   label: "Марка",
-    //   type: "select",
-    //   options: [
-    //     { value: "nike", label: "Найк" },
-    //     { value: "addidas", label: "Адисас" }
-    //   ]
-    // },
     { name: "kolichestvo", label: "Количество", type: "tel" },
     { name: "dostavkaData", label: "Дата", type: "datepicker" }
   ];
@@ -66,16 +60,26 @@ export const DeliveryForm = () => {
           onSubmit={(values, actions) => {
             API("write", "dostavkiWrite", values).then(function() {
               setData([...data, values]);
+              setShowSuccess(true);
+              setTimeout(() => {
+                setShowSuccess(false);
+              }, 5000);
               actions.resetForm();
             });
           }}
         >
-          {({ values, handleSubmit, handleChange }) => (
+          {({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <RenderForm formFields={formFields} />
               <Button variant="contained" type="submit">
                 Запази данните
               </Button>
+              <Fade show={showSuccess}>
+                <Notification
+                  text="Данните са записани успешно!"
+                  type="success"
+                />
+              </Fade>
             </form>
           )}
         </Formik>

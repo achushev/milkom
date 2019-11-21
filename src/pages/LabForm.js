@@ -13,9 +13,12 @@ import { API } from "../providers/API";
 import { SetUpInitialValues } from "../components/setUpInitialValues";
 import { TableDisplay } from "../components/tableDisplay";
 import { RenderForm } from "../components/renderForm";
+import Fade from "../components/Fade";
+import Notification from "../components/Notification";
 
 export const LabForm = () => {
   const [data, setData] = useState();
+  const [showSuccess, setShowSuccess] = useState(false);
   const { setPageTitle } = useContext(GlobalStateContext);
   const { useStyles } = useContext(StylesContext);
   setPageTitle("Лаборатория");
@@ -80,17 +83,26 @@ export const LabForm = () => {
           onSubmit={(values, actions) => {
             API("write", "labWrite", values).then(function() {
               setData([...data, values]);
+              setShowSuccess(true);
+              setTimeout(() => {
+                setShowSuccess(false);
+              }, 5000);
               actions.resetForm();
             });
           }}
         >
-          {({ values, handleSubmit, handleChange }) => (
+          {({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <RenderForm formFields={formFields} />
-
               <Button variant="contained" type="submit">
                 Запази данните
               </Button>
+              <Fade show={showSuccess}>
+                <Notification
+                  text="Данните са записани успешно!"
+                  type="success"
+                />
+              </Fade>
             </form>
           )}
         </Formik>

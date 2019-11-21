@@ -15,30 +15,67 @@ import { RenderForm } from "../components/renderForm";
 import Fade from "../components/Fade";
 import Notification from "../components/Notification";
 
-export const MilkForm = () => {
+export const YellowCheeseForm = () => {
   const [data, setData] = useState();
   const [showSuccess, setShowSuccess] = useState(false);
   const { setPageTitle } = useContext(GlobalStateContext);
   const { useStyles } = useContext(StylesContext);
-  setPageTitle("Цех прясно мляко");
+  setPageTitle("Цех кисело мляко");
   const styles = useStyles();
 
   useEffect(() => {
-    API("read", "cehPrMlyakoRead").then(function(response) {
+    API("read", "cehKashkavalRead").then(function(response) {
       setData(response.data.records);
     });
     // eslint-disable-next-line
   }, []);
 
+  const razfasofkiObj = [
+    {
+      label: "500мл",
+      value: "0.5"
+    },
+    {
+      label: "750мл",
+      value: "0.75"
+    },
+    { label: "1л", value: "1" },
+    { label: "1.5л", value: "1.5" }
+  ];
+
+  const markiObj = [
+    {
+      label: "Марка 1",
+      value: "marka_1"
+    },
+    {
+      label: "Марка 2",
+      value: "marka_2"
+    },
+    { label: "Марка 3", value: "marka_3" }
+  ];
+
   const formFields = [
     { name: "lotNomer", label: "Партида", type: "text" },
-    { name: "broiki", label: "Бройки", type: "tel" },
     {
       name: "dataProizvodstvo",
       label: "Дата производство",
       type: "datepicker"
     },
-    { name: "srokGodnost", label: "Срок на годност", type: "datepicker" }
+    { name: "srokGodnost", label: "Срок на годност", type: "datepicker" },
+    {
+      name: "razfasovka",
+      label: "Разфасовка",
+      type: "select",
+      options: razfasofkiObj
+    },
+    {
+      name: "marka",
+      label: "Марка",
+      type: "select",
+      options: markiObj
+    },
+    { name: "broiki", label: "Бройки", type: "tel" }
   ];
 
   const initialValues = SetUpInitialValues(formFields);
@@ -51,8 +88,12 @@ export const MilkForm = () => {
       "Моля въведете дата на производство"
     ),
     srokGodnost: Yup.string().required("Моля въведете срок на годност"),
+    marka: Yup.string().required("Моля въведете марка"),
     broiki: Yup.number()
       .required("Моля въведете количество")
+      .typeError("Моля въведете само цифри"),
+    razfasovka: Yup.number()
+      .required("Моля въведете разфасовка")
       .typeError("Моля въведете само цифри")
   });
 
@@ -63,7 +104,7 @@ export const MilkForm = () => {
           initialValues={initialValues}
           validationSchema={ValidationSchema}
           onSubmit={(values, actions) => {
-            API("write", "cehPrMlyakoWrite", values).then(function() {
+            API("write", "cehKashkavalWrite", values).then(function() {
               setData([...data, values]);
               setShowSuccess(true);
               setTimeout(() => {

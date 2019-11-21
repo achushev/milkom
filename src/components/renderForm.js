@@ -2,7 +2,6 @@ import React from "react";
 import { DateField, InputField, SelectField } from "./CustomFormFields";
 
 export const RenderForm = ({ formFields }) => {
-  const inputLabel = React.useRef(null);
   return formFields.map((item, index) =>
     item.type === "heading" ? (
       <h2 key={index}>{item.label}</h2>
