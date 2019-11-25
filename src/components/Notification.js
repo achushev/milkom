@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Icon, InlineIcon } from "@iconify/react";
+import React from "react";
+import { Icon } from "@iconify/react";
 import sharpCheckCircle from "@iconify/icons-ic/sharp-check-circle";
 
 const Notification = ({ text }) => {

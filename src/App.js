@@ -3,7 +3,6 @@ import { Route, BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import { GlobalStateProvider } from "./providers/GlobalStateProvider";
 import { GlobalStylesProvider } from "./providers/GlobalStylesProvider";
 import { Footer } from "./components/Footer";
-import { Home } from "./pages/Home";
 import { LabForm } from "./pages/LabForm";
 import { DeliveryForm } from "./pages/DeliveryForm";
 import { NotFound } from "./pages/NotFound";
@@ -97,7 +96,7 @@ export const App = () => {
             </header>
             <section className="layout-main-wrapper">
               <Switch>
-                <Route path="/" exact component={Home} />
+                <Route path="/" exact component={DeliveryForm} />
                 <Route path="/delivery" exact component={DeliveryForm} />
                 <Route path="/lab" exact component={LabForm} />
                 <Route path="/milk" exact component={MilkForm} />

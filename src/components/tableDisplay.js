@@ -3,18 +3,20 @@ import { Column } from "primereact/column";
 import React from "react";
 
 export const TableDisplay = ({ data, formFields }) => (
-  <DataTable value={data} responsive={true} scrollable={true}>
-    {formFields.map((item, index) => {
-      if (item.type !== "heading") {
-        return (
-          <Column
-            key={index}
-            field={item.name}
-            header={item.label}
-            style={{ width: "100px" }}
-          />
-        );
-      }
-    })}
-  </DataTable>
+  <div style={{ width: "100%", overflowX: "auto" }}>
+    <DataTable value={data} responsive={true}>
+      {formFields.map((item, index) => {
+        if (item.type !== "heading") {
+          return (
+            <Column
+              key={index}
+              field={item.name}
+              header={item.label}
+              style={{ width: "120px" }}
+            />
+          );
+        }
+      })}
+    </DataTable>
+  </div>
 );
