@@ -1,8 +1,10 @@
 import React from "react";
 import { Route, BrowserRouter as Router, Switch, Link } from "react-router-dom";
-import { GlobalStateProvider } from "./providers/GlobalStateProvider";
+import {GlobalStateProvider} from "./providers/GlobalStateProvider";
 import { GlobalStylesProvider } from "./providers/GlobalStylesProvider";
+import { ProtectedRoute } from './components/ProtectedRoute'
 import { Footer } from "./components/Footer";
+import { Login } from "./pages/Login";
 import { LabForm } from "./pages/LabForm";
 import { DeliveryForm } from "./pages/DeliveryForm";
 import { NotFound } from "./pages/NotFound";
@@ -21,6 +23,8 @@ import { YellowCheeseForm } from "./pages/YellowCheeseForm";
 import { SaladsForm } from "./pages/SaladsForm";
 
 export const App = () => {
+  //const { isLogged } = useContext(GlobalStateContext)
+
   function showNavigation(e) {
     e.preventDefault();
     document.body.classList.add("menu-open");
@@ -76,34 +80,34 @@ export const App = () => {
               </Link>
             </nav>
           </section>
-          <main className="layout-main">
-            <header className="layout-header">
-              <button
+          <header className="layout-header">
+            <button
                 onClick={e => showNavigation(e)}
                 className="menu-button icon-menu"
-              >
-                <InlineIcon icon={baselineMenu} />
-              </button>
+            >
+              <InlineIcon icon={baselineMenu} />
+            </button>
 
-              <button
+            <button
                 href="#"
                 onClick={e => closeNavigation(e)}
                 className="menu-button icon-back"
-              >
-                <InlineIcon icon={baselineArrowBackIos} />
-              </button>
-              <PageTitle />
-            </header>
+            >
+              <InlineIcon icon={baselineArrowBackIos} />
+            </button>
+            <PageTitle />
+          </header>
+          <main className="layout-main">
             <section className="layout-main-wrapper">
               <Switch>
-                <Route path="/" exact component={DeliveryForm} />
-                <Route path="/delivery" exact component={DeliveryForm} />
-                <Route path="/lab" exact component={LabForm} />
-                <Route path="/milk" exact component={MilkForm} />
-                <Route path="/whitecheese" exact component={WhiteCheeseForm} />
-                <Route path="/yogurt" exact component={YogurtForm} />
-                <Route path="/salads" exact component={SaladsForm} />
-                <Route
+                <Route path="/" exact component={Login} />
+                <ProtectedRoute path="/delivery" exact component={DeliveryForm} />
+                <ProtectedRoute path="/lab" exact component={LabForm} />
+                <ProtectedRoute path="/milk" exact component={MilkForm} />
+                <ProtectedRoute path="/whitecheese" exact component={WhiteCheeseForm} />
+                <ProtectedRoute path="/yogurt" exact component={YogurtForm} />
+                <ProtectedRoute path="/salads" exact component={SaladsForm} />
+                <ProtectedRoute
                   path="/yellowcheese"
                   exact
                   component={YellowCheeseForm}
