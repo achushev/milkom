@@ -5,7 +5,8 @@ import React from "react";
 export const TableDisplay = ({ data, formFields }) => (
   <div style={{ width: "100%", overflowX: "auto" }}>
     <DataTable value={data} responsive={true}>
-      {formFields.map((item, index) => {
+      {// eslint-disable-next-line array-callback-return
+      formFields.map((item, index) => {
         if (item.type !== "heading") {
           return (
             <Column

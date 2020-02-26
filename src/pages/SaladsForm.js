@@ -20,7 +20,7 @@ export const SaladsForm = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const { setPageTitle } = useContext(GlobalStateContext);
   const { useStyles } = useContext(StylesContext);
-  setPageTitle("Цех кисело мляко");
+  setPageTitle("Цех салати");
   const styles = useStyles();
 
   useEffect(() => {

@@ -19,6 +19,14 @@
             color:#2BDE3F;
         }
     }
+
+    &.error {
+        border-left: 3px solid #de1d3f;
+
+        svg {
+            color:#de1d3f;
+        }
+    }
 }
 
 @keyframes fadeIn {

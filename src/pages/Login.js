@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
 
 import { Button } from "@material-ui/core";
 import { SetUpInitialValues } from "../components/setUpInitialValues";
@@ -9,28 +10,44 @@ import { GlobalStateContext } from "../providers/GlobalStateProvider";
 import { StylesContext } from "../providers/GlobalStylesProvider";
 import Paper from "@material-ui/core/Paper";
 
-//import { API } from "../providers/API";
+import { API } from "../providers/API";
+import ls from "local-storage";
 
 import { RenderForm } from "../components/renderForm";
+import Notification from "../components/Notification";
+import Fade from "../components/Fade";
 
 const ValidationSchema = Yup.object().shape({
-  username: Yup.number()
-    .required("Моля въведете потребителското си име"),
+  email: Yup.string()
+    .email()
+    .required("Моля въведете email"),
   password: Yup.string().required("Моля въведете паролата си")
 });
 
 export const Login = () => {
-
-  const { setPageTitle/*, setIsLogged*/ } = useContext(GlobalStateContext);
+  const {
+    setPageTitle,
+    permissionsList,
+    userAccess,
+    setUserAccess
+  } = useContext(GlobalStateContext);
   const { useStyles } = useContext(StylesContext);
+  const [redirectToHome, setRedirectToHome] = useState(false);
+  const [showError, setShowError] = useState(false);
   setPageTitle("Вход");
-  //setIsLogged(true)
+
   const styles = useStyles();
 
+  useEffect(() => {
+    userAccess !== null && setRedirectToHome(true);
+  }, [userAccess]);
 
+  if (redirectToHome === true) {
+    return <Redirect to={"/" + permissionsList[userAccess]} />;
+  }
 
   const formFields = [
-    { name: "username", label: "Име", type: "text" },
+    { name: "email", label: "Email", type: "text" },
     { name: "password", label: "Парола", type: "password" }
   ];
 
@@ -43,7 +60,29 @@ export const Login = () => {
           initialValues={initialValues}
           validationSchema={ValidationSchema}
           onSubmit={(values, actions) => {
-            console.log('asd')
+            API(
+              "other",
+              "http://milkom.factotums.eu/api/users/login.php",
+              values
+            ).then(function(response) {
+              if (response.data.jwt) {
+                ls.set("loginCredentials", response.data.jwt);
+
+                API(
+                  "other",
+                  "http://milkom.factotums.eu/api/users/validate_token.php",
+                  { jwt: response.data.jwt }
+                ).then(function(jwtResponse) {
+                  ls.set("userAccess", jwtResponse.data.data.access);
+                  setUserAccess(parseInt(jwtResponse.data.data.access));
+                });
+              } else {
+                setShowError(true);
+                setTimeout(() => {
+                  setShowError(false);
+                }, 5000);
+              }
+            });
           }}
         >
           {({ handleSubmit }) => (
@@ -52,6 +91,10 @@ export const Login = () => {
               <Button variant="contained" type="submit">
                 Вход
               </Button>
+
+              <Fade show={showError}>
+                <Notification text="Невалидни email или парола!" type="error" />
+              </Fade>
             </form>
           )}
         </Formik>

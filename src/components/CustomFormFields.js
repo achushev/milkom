@@ -12,13 +12,14 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 
-export const InputField = ({ label, ...props }) => {
+export const InputField = ({ label, type, ...props }) => {
   const [field, meta] = useField(props);
   const errorText = meta.error && meta.touched ? meta.error : "";
 
   return (
     <TextField
       label={label}
+      type={type}
       {...field}
       margin="normal"
       variant="outlined"
