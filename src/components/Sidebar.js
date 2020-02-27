@@ -5,18 +5,19 @@ import baselineClose from "@iconify/icons-ic/baseline-close";
 import { GlobalStateContext } from "../providers/GlobalStateProvider";
 import ls from "local-storage";
 export const Sidebar = () => {
-  const { setIsLogged, userAccess, setUserAccess } = useContext(
-    GlobalStateContext
-  );
-  setUserAccess(ls.get("userAccess"));
-  setIsLogged(true);
+  const { userAccess, setUserAccess } = useContext(GlobalStateContext);
+
+  if (userAccess === null && ls.get("userAccess") !== null) {
+    setUserAccess(ls.get("userAccess"));
+  }
+
   function closeNavigation(e) {
     document.body.classList.remove("menu-open");
     document.querySelector(
       ".layout-main"
     ).style.transform = `translate3D(0, 0, 0)`;
     setTimeout(function() {
-      document.querySelector(".layout-main").style.transform = `none`;
+      //document.querySelector(".layout-main").style.transform = `none`;
     }, 500);
   }
 
@@ -91,6 +92,7 @@ export const Sidebar = () => {
               closeNavigation(e);
               ls.remove("userAccess");
               ls.remove("loginCredentials");
+              setUserAccess(null);
             }}
           >
             Изход

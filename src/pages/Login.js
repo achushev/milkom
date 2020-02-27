@@ -39,7 +39,9 @@ export const Login = () => {
   const styles = useStyles();
 
   useEffect(() => {
-    userAccess !== null && setRedirectToHome(true);
+    if (userAccess !== null) {
+      setRedirectToHome(true);
+    }
   }, [userAccess]);
 
   if (redirectToHome === true) {
@@ -74,7 +76,7 @@ export const Login = () => {
                   { jwt: response.data.jwt }
                 ).then(function(jwtResponse) {
                   ls.set("userAccess", jwtResponse.data.data.access);
-                  setUserAccess(parseInt(jwtResponse.data.data.access));
+                  setUserAccess(jwtResponse.data.data.access);
                 });
               } else {
                 setShowError(true);

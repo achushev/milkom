@@ -4,7 +4,6 @@ export const GlobalStateContext = createContext("");
 
 export const GlobalStateProvider = ({ children }) => {
   const [pageTitle, setPageTitle] = useState("");
-  const [isLogged, setIsLogged] = useState(false);
   const [userAccess, setUserAccess] = useState(null);
   const permissionsList = {
     0: "delivery",
@@ -23,8 +22,6 @@ export const GlobalStateProvider = ({ children }) => {
       value={{
         pageTitle,
         setPageTitle,
-        isLogged,
-        setIsLogged,
         userAccess,
         setUserAccess,
         permissionsList

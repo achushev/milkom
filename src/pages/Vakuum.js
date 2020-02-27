@@ -14,11 +14,14 @@ import { TableDisplay } from "../components/tableDisplay";
 import { RenderForm } from "../components/renderForm";
 import Fade from "../components/Fade";
 import Notification from "../components/Notification";
+import { formSubmitAction } from "../components/FormSubmitAction";
+import { Link } from "react-router-dom";
 
 export const Vakuum = () => {
   const [data, setData] = useState();
   const [showSuccess, setShowSuccess] = useState(false);
-  const { setPageTitle } = useContext(GlobalStateContext);
+  const [showError, setShowError] = useState(false);
+  const { setPageTitle, setUserAccess } = useContext(GlobalStateContext);
   const { useStyles } = useContext(StylesContext);
   setPageTitle("Вакуум");
   const styles = useStyles();
@@ -83,20 +86,26 @@ export const Vakuum = () => {
           initialValues={initialValues}
           validationSchema={ValidationSchema}
           onSubmit={(values, actions) => {
-            API("write", "cehVakuumWrite", values).then(function() {
-              setData([...data, values]);
-              setShowSuccess(true);
-              setTimeout(() => {
-                setShowSuccess(false);
-              }, 5000);
-              actions.resetForm();
-            });
+            formSubmitAction(
+              values,
+              actions,
+              data,
+              setData,
+              setShowSuccess,
+              setShowError,
+              setUserAccess,
+              "cehVakuumWrite"
+            );
           }}
         >
           {({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <RenderForm formFields={formFields} />
-              <Button variant="contained" type="submit">
+              <Button
+                variant="contained"
+                type="submit"
+                style={{ marginTop: "20px" }}
+              >
                 Запази данните
               </Button>
               <Fade show={showSuccess}>
@@ -104,6 +113,12 @@ export const Vakuum = () => {
                   text="Данните са записани успешно!"
                   type="success"
                 />
+              </Fade>
+              <Fade show={showError}>
+                <Notification type="error">
+                  Потребителската ви сесия е изтекла! Моля{" "}
+                  <Link to="/login">впишете се в системата тук</Link>
+                </Notification>
               </Fade>
             </form>
           )}

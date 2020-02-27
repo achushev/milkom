@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { Button } from "@material-ui/core";
 import { SetUpInitialValues } from "../components/setUpInitialValues";
@@ -14,7 +14,6 @@ import { API } from "../providers/API";
 import { RenderForm } from "../components/renderForm";
 import Fade from "../components/Fade";
 import Notification from "../components/Notification";
-import { Redirect } from "react-router-dom";
 
 const ValidationSchema = Yup.object().shape({
   email: Yup.string()

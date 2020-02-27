@@ -14,11 +14,14 @@ import { TableDisplay } from "../components/tableDisplay";
 import { RenderForm } from "../components/renderForm";
 import Fade from "../components/Fade";
 import Notification from "../components/Notification";
+import { formSubmitAction } from "../components/FormSubmitAction";
+import { Link } from "react-router-dom";
 
 export const YellowCheeseForm = () => {
   const [data, setData] = useState();
   const [showSuccess, setShowSuccess] = useState(false);
-  const { setPageTitle } = useContext(GlobalStateContext);
+  const [showError, setShowError] = useState(false);
+  const { setPageTitle, setUserAccess } = useContext(GlobalStateContext);
   const { useStyles } = useContext(StylesContext);
   setPageTitle("Цех кашкавал");
   const styles = useStyles();
@@ -112,14 +115,16 @@ export const YellowCheeseForm = () => {
           initialValues={initialValues}
           validationSchema={ValidationSchema}
           onSubmit={(values, actions) => {
-            API("write", "cehKashkavalWrite", values).then(function() {
-              setData([...data, values]);
-              setShowSuccess(true);
-              setTimeout(() => {
-                setShowSuccess(false);
-              }, 5000);
-              actions.resetForm();
-            });
+            formSubmitAction(
+              values,
+              actions,
+              data,
+              setData,
+              setShowSuccess,
+              setShowError,
+              setUserAccess,
+              "cehKashkavalWrite"
+            );
           }}
         >
           {({ handleSubmit }) => (
@@ -137,6 +142,12 @@ export const YellowCheeseForm = () => {
                   text="Данните са записани успешно!"
                   type="success"
                 />
+              </Fade>
+              <Fade show={showError}>
+                <Notification type="error">
+                  Потребителската ви сесия е изтекла! Моля{" "}
+                  <Link to="/login">впишете се в системата тук</Link>
+                </Notification>
               </Fade>
             </form>
           )}

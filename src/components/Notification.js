@@ -2,10 +2,10 @@ import React from "react";
 import { Icon } from "@iconify/react";
 import sharpCheckCircle from "@iconify/icons-ic/sharp-check-circle";
 
-const Notification = ({ text, type }) => {
+const Notification = ({ children, text, type }) => {
   return (
     <div className={`notification ${type}`}>
-      <Icon icon={sharpCheckCircle} /> {text}
+      <Icon icon={sharpCheckCircle} /> {text ? text : children}
     </div>
   );
 };

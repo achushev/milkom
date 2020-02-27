@@ -9,13 +9,12 @@ export const ProtectedRoute = ({
   ...rest
 }) => {
   const userAccess = ls.get("userAccess");
-  const isLogged = ls.get("loginCredentials");
+
   return (
     <Route
       {...rest}
       render={props =>
-        (accessLevel === parseInt(userAccess) || parseInt(userAccess) === 9) &&
-        isLogged ? (
+        accessLevel === parseInt(userAccess) || parseInt(userAccess) === 9 ? (
           <Component {...props} />
         ) : (
           <Redirect to="/login" />
