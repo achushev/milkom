@@ -88,7 +88,11 @@ export const Login = () => {
           {({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <RenderForm formFields={formFields} />
-              <Button variant="contained" type="submit">
+              <Button
+                variant="contained"
+                type="submit"
+                style={{ marginTop: "20px" }}
+              >
                 Вход
               </Button>
 

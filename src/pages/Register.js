@@ -28,21 +28,10 @@ const ValidationSchema = Yup.object().shape({
 
 export const Register = () => {
   const [showSuccess, setShowSuccess] = useState(false);
-  const [redirectToHome, setRedirectToHome] = useState(false);
-  const { setPageTitle, userAccess, permissionsList } = useContext(
-    GlobalStateContext
-  );
+  const { setPageTitle } = useContext(GlobalStateContext);
   const { useStyles } = useContext(StylesContext);
   setPageTitle("Регистрация");
   const styles = useStyles();
-
-  useEffect(() => {
-    userAccess !== null && setRedirectToHome(true);
-  }, [userAccess]);
-
-  if (redirectToHome === true) {
-    return <Redirect to={"/" + permissionsList[userAccess]} />;
-  }
 
   const formFields = [
     { name: "firstName", label: "Име", type: "text" },
@@ -119,7 +108,11 @@ export const Register = () => {
           {({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <RenderForm formFields={formFields} />
-              <Button variant="contained" type="submit">
+              <Button
+                variant="contained"
+                type="submit"
+                style={{ marginTop: "20px" }}
+              >
                 Регистрация
               </Button>
               <Fade show={showSuccess}>

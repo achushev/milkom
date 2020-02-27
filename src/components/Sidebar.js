@@ -34,6 +34,16 @@ export const Sidebar = () => {
       </button>
 
       <nav className="layout-sidebar-navigation">
+        {userAccess === "9" && (
+          <Link
+            to="/register"
+            onClick={e => {
+              closeNavigation(e);
+            }}
+          >
+            Регистрация
+          </Link>
+        )}
         {(userAccess === "0" || userAccess === "9") && (
           <Link to="/delivery" onClick={e => closeNavigation(e)}>
             Доставка
@@ -95,14 +105,6 @@ export const Sidebar = () => {
               }}
             >
               Вход
-            </Link>
-            <Link
-              to="/register"
-              onClick={e => {
-                closeNavigation(e);
-              }}
-            >
-              Регистрация
             </Link>
           </>
         )}
