@@ -35,10 +35,17 @@ export const LabForm = () => {
     { name: "shofiorIme", label: "Име на шофьор", type: "text" },
     { name: "kamionNomer", label: "Номер на камион", type: "tel" },
     { name: "kolichestvoPrieto", label: "Прието количество", type: "tel" },
+    { name: "voda", label: "Вода", type: "tel" },
     { name: "kiselinnost", label: "Киселинност", type: "tel" },
     { name: "maslenost", label: "Масленост", type: "tel" },
     { name: "plutnost", label: "Плътност", type: "tel" },
     { name: "krchislo", label: "Кр Число", type: "tel" },
+
+    { name: "zakvaska", label: "Закваска", type: "tel" },
+    { name: "salatin", label: "Салатин", type: "tel" },
+    { name: "suhoMlyako", label: "Сухо мляко", type: "tel" },
+    { name: "lipsi", label: "Липси", type: "tel" },
+
     { label: "Количества за цехове", type: "heading" },
     { name: "cehSirene", label: "Сирене", type: "tel" },
     { name: "cehPrMlyako", label: "Прясно мляко", type: "tel" },
@@ -57,6 +64,13 @@ export const LabForm = () => {
     kolichestvoPrieto: Yup.number()
       .required("Моля въведете количество")
       .typeError("Моля въведете само цифри"),
+    voda: Yup.number()
+      .required("Моля въведете количество")
+      .typeError("Моля въведете само цифри"),
+    zakvaska: Yup.number().typeError("Моля въведете само цифри"),
+    salatin: Yup.number().typeError("Моля въведете само цифри"),
+    suhoMlyako: Yup.number().typeError("Моля въведете само цифри"),
+    lipsi: Yup.number().typeError("Моля въведете само цифри"),
     cehSirene: Yup.number()
       .required("Моля въведете количество")
       .typeError("Моля въведете само цифри"),
@@ -94,7 +108,11 @@ export const LabForm = () => {
           {({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <RenderForm formFields={formFields} />
-              <Button variant="contained" type="submit">
+              <Button
+                variant="contained"
+                type="submit"
+                style={{ marginTop: "20px" }}
+              >
                 Запази данните
               </Button>
               <Fade show={showSuccess}>

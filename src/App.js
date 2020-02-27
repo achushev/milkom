@@ -22,6 +22,7 @@ import { WhiteCheeseForm } from "./pages/WhiteCheeseForm";
 import { YogurtForm } from "./pages/YogurtForm";
 import { YellowCheeseForm } from "./pages/YellowCheeseForm";
 import { SaladsForm } from "./pages/SaladsForm";
+import { Vakuum } from "./pages/Vakuum";
 
 export const App = () => {
   function showNavigation(e) {
@@ -111,6 +112,12 @@ export const App = () => {
                   accessLevel={6}
                   exact
                   component={SaladsForm}
+                />
+                <ProtectedRoute
+                  path="/vakuum"
+                  accessLevel={7}
+                  exact
+                  component={Vakuum}
                 />
                 <Route component={NotFound} />
               </Switch>

@@ -43,6 +43,29 @@ export const WhiteCheeseForm = () => {
     { label: "1.5л", value: "1.5" }
   ];
 
+  const vidObj = [
+    {
+      label: "Краве",
+      value: "krave"
+    },
+    {
+      label: "Биволско",
+      value: "Bivolsko"
+    }
+  ];
+
+  const markiObj = [
+    {
+      label: "Марка 1",
+      value: "marka_1"
+    },
+    {
+      label: "Марка 2",
+      value: "marka_2"
+    },
+    { label: "Марка 3", value: "marka_3" }
+  ];
+
   const formFields = [
     { name: "lotNomer", label: "Партида", type: "text" },
     {
@@ -57,10 +80,22 @@ export const WhiteCheeseForm = () => {
       type: "select",
       options: razfasofkiObj
     },
+    {
+      name: "vid",
+      label: "Вид",
+      type: "select",
+      options: vidObj
+    },
+    {
+      name: "marka",
+      label: "Марка",
+      type: "select",
+      options: markiObj
+    },
     { name: "broiki", label: "Бройки", type: "tel" },
     { label: "Съставки", type: "heading" },
     { name: "mlyako", label: "Мляко", type: "tel" },
-    { name: "fosKis", label: "Фолиева киселина", type: "tel" },
+    { name: "fosKis", label: "Фосфорна киселина", type: "tel" },
     { name: "limKis", label: "Лимонена киселна", type: "tel" },
     { name: "sol", label: "Сол", type: "tel" },
     { name: "maya", label: "Мая", type: "tel" },
@@ -82,7 +117,13 @@ export const WhiteCheeseForm = () => {
       .typeError("Моля въведете само цифри"),
     razfasovka: Yup.number()
       .required("Моля въведете разфасовка")
-      .typeError("Моля въведете само цифри")
+      .typeError("Моля въведете само цифри"),
+    mlyako: Yup.number().typeError("Моля въведете само цифри"),
+    fosKis: Yup.number().typeError("Моля въведете само цифри"),
+    limKis: Yup.number().typeError("Моля въведете само цифри"),
+    sol: Yup.number().typeError("Моля въведете само цифри"),
+    maya: Yup.number().typeError("Моля въведете само цифри"),
+    maslo: Yup.number().typeError("Моля въведете само цифри")
   });
 
   return (
@@ -105,7 +146,11 @@ export const WhiteCheeseForm = () => {
           {({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <RenderForm formFields={formFields} />
-              <Button variant="contained" type="submit">
+              <Button
+                variant="contained"
+                type="submit"
+                style={{ marginTop: "20px" }}
+              >
                 Запази данните
               </Button>
               <Fade show={showSuccess}>

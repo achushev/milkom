@@ -75,7 +75,10 @@ export const YellowCheeseForm = () => {
       type: "select",
       options: markiObj
     },
-    { name: "broiki", label: "Бройки", type: "tel" }
+    { name: "broiki", label: "Бройки", type: "tel" },
+    { name: "mlyako", label: "Мляко", type: "tel" },
+    { name: "kantar", label: "Кантар", type: "tel" },
+    { name: "fosfornaKiselina", label: "Фосфорна киселина", type: "tel" }
   ];
 
   const initialValues = SetUpInitialValues(formFields);
@@ -94,7 +97,12 @@ export const YellowCheeseForm = () => {
       .typeError("Моля въведете само цифри"),
     razfasovka: Yup.number()
       .required("Моля въведете разфасовка")
-      .typeError("Моля въведете само цифри")
+      .typeError("Моля въведете само цифри"),
+    mlyako: Yup.number()
+      .required("Моля въведете количество")
+      .typeError("Моля въведете само цифри"),
+    kantar: Yup.number().typeError("Моля въведете само цифри"),
+    fosfornaKiselina: Yup.number().typeError("Моля въведете само цифри")
   });
 
   return (
@@ -117,7 +125,11 @@ export const YellowCheeseForm = () => {
           {({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <RenderForm formFields={formFields} />
-              <Button variant="contained" type="submit">
+              <Button
+                variant="contained"
+                type="submit"
+                style={{ marginTop: "20px" }}
+              >
                 Запази данните
               </Button>
               <Fade show={showSuccess}>

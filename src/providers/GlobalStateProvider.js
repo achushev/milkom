@@ -14,6 +14,7 @@ export const GlobalStateProvider = ({ children }) => {
     4: "whitecheese",
     5: "yellowcheese",
     6: "salads",
+    7: "vakuum",
     9: "delivery"
   };
 

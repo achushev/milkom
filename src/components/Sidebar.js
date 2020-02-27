@@ -69,6 +69,11 @@ export const Sidebar = () => {
             Цех салати
           </Link>
         )}
+        {(userAccess === "7" || userAccess === "9") && (
+          <Link to="/vakuum" onClick={e => closeNavigation(e)}>
+            Вакуум
+          </Link>
+        )}
         {userAccess && (
           <Link
             to="/login"

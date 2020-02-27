@@ -73,7 +73,13 @@ export const SaladsForm = () => {
     vlojenProdukt: Yup.string().required("Моля въведете вложен продукт"),
     kolVlojenProdukt: Yup.number()
       .required("Моля въведете количество вложен продукт")
-      .typeError("Моля въведете само цифри")
+      .typeError("Моля въведете само цифри"),
+    chushki: Yup.number().typeError("Моля въведете само цифри"),
+    kisKrastavici: Yup.number().typeError("Моля въведете само цифри"),
+    krastavici: Yup.number().typeError("Моля въведете само цифри"),
+    podpravki: Yup.number().typeError("Моля въведете само цифри"),
+    shunka: Yup.number().typeError("Моля въведете само цифри"),
+    izvara: Yup.number().typeError("Моля въведете само цифри")
   });
 
   const formFields = [
@@ -109,7 +115,8 @@ export const SaladsForm = () => {
     { name: "kisKrastavici", label: "Кисели краставици", type: "tel" },
     { name: "krastavici", label: "Краставици", type: "tel" },
     { name: "podpravki", label: "Подправки", type: "tel" },
-    { name: "shunka", label: "Шунка", type: "tel" }
+    { name: "shunka", label: "Шунка", type: "tel" },
+    { name: "izvara", label: "Извара", type: "tel" }
   ];
 
   const initialValues = SetUpInitialValues(formFields);
@@ -134,7 +141,11 @@ export const SaladsForm = () => {
           {({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <RenderForm formFields={formFields} />
-              <Button variant="contained" type="submit">
+              <Button
+                variant="contained"
+                type="submit"
+                style={{ marginTop: "20px" }}
+              >
                 Запази данните
               </Button>
               <Fade show={showSuccess}>
