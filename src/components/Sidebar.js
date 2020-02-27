@@ -22,6 +22,9 @@ export const Sidebar = () => {
 
   return (
     <section className="layout-sidebar">
+      <div className="logoMilk">
+        <img src="../images/logo.png" alt="Милкком" />
+      </div>
       <button
         href="#"
         onClick={e => closeNavigation(e)}

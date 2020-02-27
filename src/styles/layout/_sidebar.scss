@@ -2,17 +2,17 @@
     width: $sidebar-width;
     padding: $padding 0;
     height: 100vh;
-    background: $sidebar-background;
+    background: #0062ab;
     position: fixed;
     z-index: 10;
 
-    .logo {
-        position: absolute;
-        left: $padding;
-        top: $padding;
-        right: $padding;
+    .logoMilk {
         display: block;
-        width: 100%;
+        width: 250px;
+        text-align: center;
+    }
+
+    .logoMilk img{
         max-width: 190px;
     }
 
@@ -38,13 +38,18 @@
 
         a {
             display:block;
-            color:$text-light;
+            color:#FFF;
             font-size:20px;
             padding: 20px 30px;
             font-weight: 300;
+            background:#1684d7;
+            border-radius: 6px;
+            margin: 10px 10px;
+            transition: all 0.2s ease-in;
 
-            & + a {
-                border-top: 1px solid rgba(52, 56, 65, 0.6);
+            &:hover {
+                background:#fff;
+                color:#1684d7;
             }
 
             &.active {
