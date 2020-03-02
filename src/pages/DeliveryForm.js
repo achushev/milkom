@@ -29,7 +29,7 @@ const ValidationSchema = Yup.object().shape({
 });
 
 export const DeliveryForm = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const { setPageTitle, setUserAccess } = useContext(GlobalStateContext);

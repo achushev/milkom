@@ -18,7 +18,7 @@ import { formSubmitAction } from "../components/FormSubmitAction";
 import { Link } from "react-router-dom";
 
 export const YellowCheeseForm = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const { setPageTitle, setUserAccess } = useContext(GlobalStateContext);
@@ -35,12 +35,20 @@ export const YellowCheeseForm = () => {
 
   const razfasofkiObj = [
     {
-      label: "500мл",
-      value: "0.5"
+      label: "200мл",
+      value: "0.200"
     },
     {
-      label: "750мл",
-      value: "0.75"
+      label: "300мл",
+      value: "0.300"
+    },
+    {
+      label: "500мл",
+      value: "0.500 "
+    },
+    {
+      label: "4-8кг",
+      value: "4-8"
     },
     { label: "1л", value: "1" },
     { label: "1.5л", value: "1.5" }
@@ -48,14 +56,14 @@ export const YellowCheeseForm = () => {
 
   const markiObj = [
     {
-      label: "Марка 1",
-      value: "marka_1"
+      label: "Милкком",
+      value: "Милкком"
     },
     {
-      label: "Марка 2",
-      value: "marka_2"
+      label: "Грънчаров",
+      value: "Грънчаров"
     },
-    { label: "Марка 3", value: "marka_3" }
+    { label: "БДС", value: "БДС" }
   ];
 
   const formFields = [

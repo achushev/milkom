@@ -69,6 +69,7 @@ export const App = () => {
             <section className="layout-main-wrapper">
               <Switch>
                 <Route path="/login" exact component={Login} />
+                <Route path="/" exact component={Login} />
                 <ProtectedRoute
                   path="/register"
                   accessLevel={9}

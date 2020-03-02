@@ -18,7 +18,7 @@ import { formSubmitAction } from "../components/FormSubmitAction";
 import { Link } from "react-router-dom";
 
 export const YogurtForm = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const { setPageTitle, setUserAccess } = useContext(GlobalStateContext);
@@ -35,27 +35,41 @@ export const YogurtForm = () => {
 
   const razfasofkiObj = [
     {
-      label: "500мл",
-      value: "0.5"
+      label: "200гр",
+      value: "0.200"
     },
     {
-      label: "750мл",
-      value: "0.75"
+      label: "300гр",
+      value: "0.300"
     },
-    { label: "1л", value: "1" },
-    { label: "1.5л", value: "1.5" }
+    {
+      label: "370гр",
+      value: "0.370"
+    },
+    {
+      label: "400гр",
+      value: "0.400"
+    },
+    {
+      label: "500гр",
+      value: "0.500"
+    }
   ];
 
   const markiObj = [
     {
-      label: "Марка 1",
-      value: "marka_1"
+      label: "Милкком",
+      value: "Милкком"
     },
     {
-      label: "Марка 2",
-      value: "marka_2"
+      label: "Грънчаров",
+      value: "Грънчаров"
     },
-    { label: "Марка 3", value: "marka_3" }
+    { label: "Панега", value: "Панега" },
+    { label: "Бай Дако", value: "Бай Дако" },
+    { label: "Плевенско", value: "Плевенско" },
+    { label: "Тракторъ", value: "Тракторъ" },
+    { label: "БДС", value: "БДС" }
   ];
 
   const formFields = [

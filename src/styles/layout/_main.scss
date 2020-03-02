@@ -1,5 +1,5 @@
 .layout-main {
-    height: 100%;
+    min-height: calc(100vh - 70px);
     max-width: 1300px;
     padding-left: $sidebar-width; //100px $padding $padding #{$sidebar-width + $padding};
     padding-top: 70px;

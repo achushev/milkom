@@ -18,7 +18,7 @@ import { formSubmitAction } from "../components/FormSubmitAction";
 import { Link } from "react-router-dom";
 
 export const WhiteCheeseForm = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const { setPageTitle, setUserAccess } = useContext(GlobalStateContext);
@@ -35,38 +35,46 @@ export const WhiteCheeseForm = () => {
 
   const razfasofkiObj = [
     {
-      label: "500мл",
-      value: "0.5"
+      label: "тенекия 7-15кг",
+      value: "7-15"
     },
     {
-      label: "750мл",
-      value: "0.75"
+      label: "Кутия 5-9 кг",
+      value: "5-9"
     },
-    { label: "1л", value: "1" },
-    { label: "1.5л", value: "1.5" }
+    { label: "400 гр", value: "0.400" },
+    { label: "800 гр", value: "0.800" }
   ];
 
   const vidObj = [
     {
       label: "Краве",
-      value: "krave"
+      value: "Краве"
     },
     {
       label: "Биволско",
-      value: "Bivolsko"
+      value: "Биволско"
+    },
+    {
+      label: "Овче",
+      value: "Овче"
+    },
+    {
+      label: "Козе",
+      value: "КозеКозе"
     }
   ];
 
   const markiObj = [
     {
-      label: "Марка 1",
-      value: "marka_1"
+      label: "Милкком",
+      value: "Милкком"
     },
     {
-      label: "Марка 2",
-      value: "marka_2"
+      label: "Грънчаров",
+      value: "Грънчаров"
     },
-    { label: "Марка 3", value: "marka_3" }
+    { label: "БДС", value: "БДС" }
   ];
 
   const formFields = [

@@ -18,7 +18,7 @@ import { formSubmitAction } from "../components/FormSubmitAction";
 import { Link } from "react-router-dom";
 
 export const Vakuum = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const { setPageTitle, setUserAccess } = useContext(GlobalStateContext);

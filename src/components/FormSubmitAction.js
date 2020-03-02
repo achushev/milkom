@@ -16,7 +16,8 @@ export const formSubmitAction = (
   }).then(function(jwtResponse) {
     if (jwtResponse.data.data) {
       API("write", endpoint, values).then(function() {
-        setData([...data, values]);
+        data !== null ? setData([...data, values]) : setData([values]);
+
         setShowSuccess(true);
         setTimeout(() => {
           setShowSuccess(false);

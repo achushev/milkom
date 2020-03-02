@@ -18,7 +18,7 @@ import { formSubmitAction } from "../components/FormSubmitAction";
 import { Link } from "react-router-dom";
 
 export const SaladsForm = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const { setPageTitle, setUserAccess } = useContext(GlobalStateContext);
@@ -35,23 +35,31 @@ export const SaladsForm = () => {
 
   const vidObj = [
     {
-      label: "Млечна салата",
-      value: "mlechna_salata"
+      label: "Снежанка",
+      value: "Снежанка"
     },
     {
-      label: "Руска салата",
-      value: "ruska_salata"
+      label: "Салатина",
+      value: "Салатина"
+    },
+    {
+      label: "Топено сирене",
+      value: "Топено сирене"
+    },
+    {
+      label: "Катък с чушка",
+      value: "Катък с чушка"
     }
   ];
 
   const vlojenProduktObj = [
     {
       label: "Шунка",
-      value: "shunka"
+      value: "Шунка"
     },
     {
       label: "Салам",
-      value: "salam"
+      value: "Салам"
     }
   ];
 
