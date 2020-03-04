@@ -53,6 +53,10 @@ export const YogurtForm = () => {
     {
       label: "500гр",
       value: "0.500"
+    },
+    {
+      label: "550гр",
+      value: "0.550"
     }
   ];
 
