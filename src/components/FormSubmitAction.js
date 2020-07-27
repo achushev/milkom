@@ -9,7 +9,8 @@ export const formSubmitAction = (
   setShowSuccess,
   setShowError,
   setUserAccess,
-  endpoint
+  endpoint,
+  setTankirano
 ) => {
   API("other", "http://milkom.factotums.eu/api/users/validate_token.php", {
     jwt: ls.get("loginCredentials")
@@ -23,6 +24,13 @@ export const formSubmitAction = (
           setShowSuccess(false);
         }, 5000);
         actions.resetForm();
+
+        setTankirano !== undefined && (
+            API("read", "labRead").then(function(response) {
+             setTankirano(response.data.tankirane[0].tankirano)
+            })
+        )
+
       });
     } else {
       setShowError(true);

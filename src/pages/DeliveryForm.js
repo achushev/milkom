@@ -23,9 +23,15 @@ const ValidationSchema = Yup.object().shape({
     .typeError("Моля въведете само цифри"),
   shofiorIme: Yup.string().required("Моля въведете име на шофьора"),
   ferma: Yup.string().required("Моля въведете име на фермата"),
-  kolichestvo: Yup.number()
-    .required("Моля въведете количество")
-    .typeError("Моля въведете само цифри")
+  cisterna1: Yup.number()
+      .required("Моля въведете количество за цистерна 1")
+      .typeError("Моля въведете само цифри"),
+  cisterna2: Yup.number()
+      .required("Моля въведете количество за цистерна 2")
+      .typeError("Моля въведете само цифри"),
+  cisterna3: Yup.number()
+      .required("Моля въведете количество за цистерна 3")
+      .typeError("Моля въведете само цифри")
 });
 
 export const DeliveryForm = () => {
@@ -47,8 +53,10 @@ export const DeliveryForm = () => {
   const formFields = [
     { name: "shofiorIme", label: "Име на шофьор", type: "text" },
     { name: "kamionNomer", label: "Номер на камион", type: "tel" },
+    { name: "cisterna1", label: "Цистерна 1", type: "tel" },
+    { name: "cisterna2", label: "Цистерна 2", type: "tel" },
+    { name: "cisterna3", label: "Цистерна 3", type: "tel" },
     { name: "ferma", label: "Ферма", type: "text" },
-    { name: "kolichestvo", label: "Количество", type: "tel" },
     { name: "dostavkaData", label: "Дата", type: "datepicker" }
   ];
 

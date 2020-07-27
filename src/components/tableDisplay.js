@@ -7,7 +7,7 @@ export const TableDisplay = ({ data, formFields }) => (
     <DataTable value={data} responsive={true}>
       {// eslint-disable-next-line array-callback-return
       formFields.map((item, index) => {
-        if (item.type !== "heading") {
+        if (item.type !== "heading" && item.name !== "tankirano") {
           return (
             <Column
               key={index}

@@ -20,6 +20,7 @@ import { Link } from "react-router-dom";
 
 export const LabForm = () => {
   const [data, setData] = useState(null);
+  const [tankirano, setTankirano] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const { setPageTitle, setUserAccess } = useContext(GlobalStateContext);
@@ -30,6 +31,7 @@ export const LabForm = () => {
   useEffect(() => {
     API("read", "labRead").then(function(response) {
       setData(response.data.records);
+      setTankirano(response.data.tankirane[0].tankirano);
     });
     // eslint-disable-next-line
   }, []);
@@ -48,6 +50,7 @@ export const LabForm = () => {
     { name: "salatin", label: "Салатин", type: "tel" },
     { name: "suhoMlyako", label: "Сухо мляко", type: "tel" },
     { name: "lipsi", label: "Липси", type: "tel" },
+    { name: "tankirano", label: "Танкирано", type: "tel" },
 
     { label: "Количества за цехове", type: "heading" },
     { name: "cehSirene", label: "Сирене", type: "tel" },
@@ -74,6 +77,7 @@ export const LabForm = () => {
     salatin: Yup.number().typeError("Моля въведете само цифри"),
     suhoMlyako: Yup.number().typeError("Моля въведете само цифри"),
     lipsi: Yup.number().typeError("Моля въведете само цифри"),
+    tankirano: Yup.number().typeError("Моля въведете само цифри"),
     cehSirene: Yup.number()
       .required("Моля въведете количество")
       .typeError("Моля въведете само цифри"),
@@ -94,11 +98,18 @@ export const LabForm = () => {
   return (
     <>
       <Paper className={styles.paper}>
+        {tankirano !== null && (
+            <div style={{textAlign: "center", fontSize: "1.1em"}}>
+              <strong>Танкирано мляко:</strong> {tankirano} литра
+            </div>
+        )}
+      </Paper>
+      <Paper className={styles.paper}>
         <Formik
           initialValues={initialValues}
           validationSchema={ValidationSchema}
           onSubmit={(values, actions) => {
-            formSubmitAction(
+            setTankirano(formSubmitAction(
               values,
               actions,
               data,
@@ -106,8 +117,9 @@ export const LabForm = () => {
               setShowSuccess,
               setShowError,
               setUserAccess,
-              "labWrite"
-            );
+              "labWrite",
+              setTankirano
+            ))
           }}
         >
           {({ handleSubmit }) => (
