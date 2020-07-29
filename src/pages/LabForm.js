@@ -31,7 +31,7 @@ export const LabForm = () => {
   useEffect(() => {
     API("read", "labRead").then(function(response) {
       setData(response.data.records);
-      setTankirano(response.data.tankirane[0].tankirano);
+      setTankirano(response.data.tankirane[0]);
     });
     // eslint-disable-next-line
   }, []);
@@ -99,8 +99,27 @@ export const LabForm = () => {
     <>
       <Paper className={styles.paper}>
         {tankirano !== null && (
-            <div style={{textAlign: "center", fontSize: "1.1em"}}>
-              <strong>Танкирано мляко:</strong> {tankirano} литра
+            <div className="tankirane_container">
+              <strong>Танкирано количество:</strong> {tankirano.tankirano} литра
+
+              <div className="breakdown">
+                  {Object.keys(tankirano).map((item, key) => {
+                      const tankiranoLabels = {
+                          drugi: "Други",
+                          kashkaval: "Кашкавал",
+                          kiselo: "Кисело мляко",
+                          pryasno: "Прясно мляко",
+                          sirene: "Сирене"
+                      }
+
+                      return (
+                        item !== 'tankirano' && (
+                          <div key={key}>
+                              <strong>{tankiranoLabels[item]}</strong> {tankirano[item]}л
+                          </div>
+                      )
+                  )})}
+              </div>
             </div>
         )}
       </Paper>
@@ -109,7 +128,7 @@ export const LabForm = () => {
           initialValues={initialValues}
           validationSchema={ValidationSchema}
           onSubmit={(values, actions) => {
-            setTankirano(formSubmitAction(
+            formSubmitAction(
               values,
               actions,
               data,
@@ -119,7 +138,7 @@ export const LabForm = () => {
               setUserAccess,
               "labWrite",
               setTankirano
-            ))
+            )
           }}
         >
           {({ handleSubmit }) => (

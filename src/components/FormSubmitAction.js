@@ -27,7 +27,7 @@ export const formSubmitAction = (
 
         setTankirano !== undefined && (
             API("read", "labRead").then(function(response) {
-             setTankirano(response.data.tankirane[0].tankirano)
+             setTankirano(response.data.tankirane[0])
             })
         )
 
